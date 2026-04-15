@@ -178,18 +178,16 @@ def generate_timeline_summary_with_llm(emails_data, output_path, folder_name):
     prompt = f"""
 You are an AI assistant helping to summarize email communications for freight logistics shipments.
 
-Based on the following email data for shipment {folder_name}, create a chronological timeline summary in markdown format.
+Based on the following email data for shipment {folder_name}, create a summary in markdown format.
 
 Email Data:
 {all_emails_text}
 
-Please generate a timeline summary that includes:
+Please generate a summary that includes:
 1. Chronological summary of key communications
-2. Extracted action items, owners, and deadlines
-3. Important decisions or changes
-4. Current status of the shipment
+2. Executive summary highlighting key outcomes, current status, and next steps
 
-Format as a clean markdown document with sections for timeline and action items.
+Format as a clean markdown document with sections for timeline and executive summary.
 """
     
     try:
@@ -581,12 +579,6 @@ def generate_timeline_summary(emails_data, output_path):
     # Sort emails by date (oldest first)
     emails_data = sorted([e for e in emails_data if e], key=lambda x: x['date'])
     
-    # Collect all actions across emails
-    all_actions = []
-    for email in emails_data:
-        actions = extract_actions_from_content(email['body'], email['date_str'])
-        all_actions.extend(actions)
-    
     # Generate chronological summary section
     chrono_section = "## Chronological Email Summary\n\n"
     for email in emails_data:
@@ -602,23 +594,23 @@ def generate_timeline_summary(emails_data, output_path):
             chrono_section += "- Review email for details\n"
         chrono_section += "\n"
     
-    # Generate actions table
-    actions_table = "## Decisions & Action Items\n\n"
-    if all_actions:
-        actions_table += "| Date | Owner | Action Item | Deadline |\n"
-        actions_table += "|------|-------|-------------|----------|\n"
-        for action in sorted(all_actions, key=lambda x: x['date']):
-            date_short = ' '.join(action['date'][:3])
-            actions_table += f"| {date_short} | {action['owner']} | {action['action']} | {action['deadline']} |\n"
+    # Generate executive summary
+    exec_summary = "## Executive Summary\n\n"
+    if emails_data:
+        latest_email = max(emails_data, key=lambda x: x['date'])
+        exec_summary += f"This shipment communication thread spans from the earliest email on {emails_data[0]['date_str']} to the latest on {latest_email['date_str']}. "
+        exec_summary += f"A total of {len(emails_data)} emails were exchanged regarding the shipment.\n\n"
+        exec_summary += "Current status: Ongoing shipment processing based on email discussions. Review the chronological summary above for detailed insights.\n\n"
+        exec_summary += "Next steps: Monitor for updates to ensure timely completion of shipment requirements."
     else:
-        actions_table += "*No explicit action items detected*\n"
+        exec_summary += "No email data available for summary."
     
     # Write timeline summary
     timeline_content = f"""# Email Communications Timeline
 
 {chrono_section}
 
-{actions_table}
+{exec_summary}
 """
     
     with open(output_path, 'w', encoding='utf-8') as f:

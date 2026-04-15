@@ -176,3 +176,76 @@ The Python script merge_checklist.py has been successfully created and tested. H
 - All shipment information (File Ref, Client Ref, Description, etc.) and task statuses (✓, ⏳, —) are properly included
 
 The script is ready for use across different project folders in the EmailProcessor workspace. To run it, navigate to any project folder and execute `python ../zScripts/merge_checklist.py`.
+
+
+
+-------------------
+
+
+Read [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py#400-400), lines 400 to 450
+
+Searched for text `def generate_timeline_summary`, 6 results
+
+Read [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py#579-579), lines 579 to 650
+
+Replacing 17 lines with 18 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py)
+
+
+
+Replacing 18 lines with 35 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py)
+
+
+Yes, the script can be updated to add an executive summary at the bottom of the outputted timeline summary file. I've modified the `generate_timeline_summary_with_llm` function to include an executive summary in the LLM prompt (as point 5), and updated the fallback `generate_timeline_summary` function to append a basic executive summary section based on the email data.
+
+Regarding the local LLM: Yes, it is capable of creating an executive summary. The GPT4All model (Llama-3.2-1B-Instruct) is a text generation model that can produce coherent summaries, as it's already being used to generate the timeline content. The updated prompt now explicitly requests an executive summary highlighting key outcomes, current status, and next steps.
+
+The changes ensure that:
+- When the LLM is available, it generates the full timeline including the executive summary.
+- If the LLM fails, the fallback creates a simple executive summary with basic stats (email count, date range, action items) and generic next steps.
+
+You can test this by running the script in one of the shipment folders (e.g., `2602DSI2783 - BA2950`) to see the updated timeline file with the executive summary at the bottom.
+
+--------------
+
+Replacing 18 lines with 15 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py)
+
+Replacing 61 lines with 38 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/email_processor-msg-perplex.py)
+
+
+```
+
+```
+The script has been updated to remove the "Decisions & Action Items" section from the output. Now, the timeline summary file will only include:
+
+- The chronological email summary
+- The executive summary
+
+The LLM prompt has been simplified to generate only these two sections, and the fallback function no longer extracts or includes action items. This should produce a cleaner, more focused summary as requested. You can test it by running the script again in a shipment folder.
+
+----------------
+
+Replacing 52 lines with 59 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/merge_checklist.py)
+
+
+```
+
+```
+
+
+Replacing 67 lines with 8 lines in [](file:///c%3A/Users/Jason/Projects/EmailProcessor/zScripts/merge_checklist.py)
+
+
+```
+
+```
+The script has been updated to extract and output only the executive summaries from all markdown files in the 'markdown' directory, sorted from latest to first by modification time. The output file is named `{folder_name}_executive_summaries_{YYYYMMDD}.md` and includes each executive summary section prefixed with the source filename, separated by dividers.
+
+Key changes:
+- Removed the checklist merging logic and template dependency.
+- Added a function to extract the "## Executive Summary" section from each markdown file.
+- Processes all .md files, not just those with specific content.
+- Outputs a consolidated file with all executive summaries in chronological order (latest first).
+
+You can run the updated script in any shipment folder to generate the executive summaries file.
+
+----------------
