@@ -1,0 +1,80 @@
+# Email files (raw client communications)
+*.msg
+*.eml
+
+# Attachments and documents
+*.pdf
+*.docx
+*.xlsx
+*.xls
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+venv/
+env/
+.venv/
+
+# API keys and credentials
+.env
+.env.local
+api_keys.txt
+secrets.json
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Exclude entire project folders (shipment data)
+BA2797/
+BA2861/
+BA2862/
+BA2863/
+BA2869/
+BA2902/
+BA2949/
+BA2959/
+BA2965/
+BA2971/
+BA2982/
+BA2983/
+BA2984/
+BA2985/
+BA2999/
+BA3000/
+BA3001/
+BA3032/
+BA3048/
+BA3109/
+2025010600517-CO-LOADED_RATE_226/
+2025010600552-CAT_6030_BUCKET_-_CFR_DURBAN_PORT_TO_CPT_SAKANIA/
+745-EX-STOCK/
+2511DSI2731/
+2511DSI2736  - BA2974-BA2975/
+2601DSI2758-2759-2766-2767-2768-2769/
+2602DSI2781 - BA3160/
+2602DSI2783 - BA2950/
+BA3188A-BA3189A/
+CAT CAB 320GX/
+K Line for transporting Caterpillar 745 ADT/
+
+
+# Exclude other data folders
+BARTRAC EQUIPMENT _ MUMI TRACKING AS OF 11-12-2025/
+BARTRAC EQUIPMENT _ MUMI TRACKING AS OF 17-12-2025/
+KINSHASA_CAT_426_UNITS/
+MATADI_TO_KINSHASA_CITY/
+
+# Exclude metadata
+EmailProcessor.json
+project/markdown/RE__X-HAUL_INSTRUCTION_-_1_X_40__GP_CONTAINER_STC__RE_ X-HAUL INSTRUCTION - 1 X 40' GP CONTAINER STC 2 X CAT426 BACKHOE LOADER IN SKD FORM - FML REF_ 2511DSI2735 - BA2972_ BA2973 - BILL_ MAEU261519076.md
+project/markdown/X-HAUL_INSTRUCTION_-_1_X_40__GP_CONTAINER_STC_2_X__X-HAUL INSTRUCTION - 1 X 40' GP CONTAINER STC 2 X CAT426 BACKHOE LOADER IN SKD FORM - FML REF_ 2511DSI2735 - BA2972_ BA2973 - BILL_ MAEU261519076.md
+project-template/markdown/timeline_%foldername%_summary.md

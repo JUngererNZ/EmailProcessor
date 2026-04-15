@@ -1,0 +1,178 @@
+{
+  "directory": "C:\\Users\\Jason\\FML Freight Solutions\\FML Doc Share - Documents\\BARTRAC\\2510DSI2724 - BA2970 - CAT D9GC-03B - CE",
+  "scan_date": "2026-02-17T15:33:37.564990",
+  "statistics": {
+    "total_files": 80,
+    "total_directories": 9,
+    "total_size_bytes": 23604575,
+    "total_size_mb": 22.51,
+    "file_types": {
+      ".pdf": 59,
+      ".doc": 3,
+      ".md": 2,
+      ".xls": 4,
+      ".py": 1,
+      ".xlsx": 1,
+      ".msg": 10
+    },
+    "largest_files": [
+      {
+        "name": "claim .msg",
+        "size_mb": 2.93,
+        "path": "SHIPPING LINE\\claim .msg"
+      },
+      {
+        "name": "RE_ BA2970 - D9GC - MSO AXAEQ  - TOP URGENT.msg",
+        "size_mb": 1.01,
+        "path": "RE_ BA2970 - D9GC - MSO AXAEQ  - TOP URGENT.msg"
+      },
+      {
+        "name": "RE_ K645_K64C_ AXAEQ _ Shipping Documents - drafts - D9GC - BA2970.msg",
+        "size_mb": 0.95,
+        "path": "RE_ K645_K64C_ AXAEQ _ Shipping Documents - drafts - D9GC - BA2970.msg"
+      },
+      {
+        "name": "FW_ BA2970 - D9GC - MSO AXAEQ  - TOP URGENT.msg",
+        "size_mb": 0.88,
+        "path": "FW_ BA2970 - D9GC - MSO AXAEQ  - TOP URGENT.msg"
+      },
+      {
+        "name": "Export print B´L_01 MAg Unfrtd_MACY253210GU267_GU013958_CATERPILLACHGVA_GB_AMALIA_253210_GU_251202004336687_Renee.St.pdf",
+        "size_mb": 0.81,
+        "path": "docs\\Export print B´L_01 MAg Unfrtd_MACY253210GU267_GU013958_CATERPILLACHGVA_GB_AMALIA_253210_GU_251202004336687_Renee.St.pdf"
+      }
+    ],
+    "date_analysis": {
+      "most_recent": "2026-02-17",
+      "date_range": "2024-04-17 to 2026-02-17"
+    }
+  },
+  "core_reference": {
+    "file_ref": "",
+    "client_ref": "",
+    "consignee": "",
+    "description": "",
+    "pin_no": "00041339",
+    "serial_no": "AK401088",
+    "engine_no": "",
+    "vessel_voy": "SECURITY",
+    "bill_no": "NUMBER-USOL112-00041339-INVOICEPACKAGE",
+    "eta": "",
+    "container_no": "",
+    "transporter": ""
+  },
+  "billing_rates": {
+    "client_invoice": {
+      "requested": true,
+      "received": true
+    },
+    "tariff_code": "",
+    "weight_cube": {
+      "length": "",
+      "breadth": "",
+      "height": ""
+    },
+    "cod_bv_booked": {
+      "requested": true,
+      "date_booked": "Found in documents"
+    },
+    "fix_number": "",
+    "client_po": {
+      "number": "Found in documents"
+    },
+    "quotation_nr": {
+      "created": false,
+      "number": ""
+    },
+    "rate_sheet": {
+      "applicable": false
+    }
+  },
+  "tasks_progress": {
+    "logistics_instructions": {
+      "transport_instruction": {
+        "status": "🔵",
+        "details": "Transport instructions found"
+      },
+      "x_haul_instruction": {
+        "status": "⚪",
+        "details": ""
+      },
+      "landing_order": {
+        "status": "⚪",
+        "details": ""
+      },
+      "warehouse_notification": {
+        "status": "⚪",
+        "details": ""
+      }
+    },
+    "documentation_customs": {
+      "anf": {
+        "status": "⚪",
+        "details": ""
+      },
+      "customs_entry": {
+        "status": "🔵",
+        "details": "Customs entry documents found"
+      },
+      "cargo_dues": {
+        "status": "⚪",
+        "details": ""
+      },
+      "bv_feri_ad": {
+        "status": "🔵",
+        "details": "BV/FERI/AD documents found"
+      },
+      "pre_alert": {
+        "status": "⚪",
+        "details": ""
+      }
+    },
+    "release_delivery": {
+      "line_invoice": {
+        "status": "⚪",
+        "details": ""
+      },
+      "release_letter": {
+        "status": "🔵",
+        "details": "Release letter found"
+      },
+      "release_mail": {
+        "status": "⚪",
+        "details": ""
+      },
+      "pod": {
+        "status": "⚪",
+        "details": ""
+      }
+    },
+    "financials_finalization": {
+      "final_docs": {
+        "status": "⚪",
+        "details": ""
+      },
+      "costing": {
+        "status": "🔵",
+        "details": "Costing documents found"
+      },
+      "invoicing": {
+        "status": "🔵",
+        "details": "Invoicing documents found"
+      },
+      "acquittal": {
+        "status": "⚪",
+        "details": ""
+      }
+    }
+  },
+  "visuals_verification": {
+    "we_pics": false,
+    "xe_pics": false,
+    "all_pictures_uploaded": false
+  },
+  "file_status": {
+    "status": "🔵 In Progress",
+    "generated_date": "2026-02-17"
+  }
+}
