@@ -46,7 +46,9 @@ Here are concrete examples from the repository that demonstrate the system's val
 
 These examples show how the system transforms unstructured email data into actionable business intelligence for freight operations.
 
-Human adding comments here:
+### Human adding comments here ###
+
+
 **Why am I doing this?**
 The why, I get looped in on so much information of shipping stuff that it hurts my IT Brain.
 So I created this vault (Obsidian speak) to condense down the noise and see facts against a pre-scribed list of tasks to be completed.
