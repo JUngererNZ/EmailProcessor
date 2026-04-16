@@ -54,6 +54,7 @@ BA3001/
 BA3032/
 BA3048/
 BA3109/
+BA3097/
 2025010600517-CO-LOADED_RATE_226/
 2025010600552-CAT_6030_BUCKET_-_CFR_DURBAN_PORT_TO_CPT_SAKANIA/
 745-EX-STOCK/
@@ -67,6 +68,12 @@ CAT CAB 320GX/
 K Line for transporting Caterpillar 745 ADT/
 2601DSI2758 - BA3112-BA3113/
 CAT 140GC GRADER/
+CAT 6015 AND PARTS/
+CAT 777 FBU/
+2510DSI2723 - BA2985/
+2510DSI2723 - BA2985/
+CAT 6030 BUCKET/
+2602DSI2779 - BA3101/
 
 
 # Exclude other data folders
@@ -104,3 +111,9 @@ CAT 777 FBU/markdown/30_X_CAT_777_FBU_DURBAN_TO_LUBUMBASHI_-_VALIDITY_-_30 X CAT
 CAT 777 FBU/markdown/FML-CHECKLIST-CAT 777 FBU.md
 CAT 777 FBU/markdown/timeline_%foldername%_summary.md
 CAT 777 FBU/markdown/timeline_CAT 777 FBU_summary.md
+BA3195 - BA3198/previous-merge-script.py
+BA3195 - BA3198/LLM-ask-summary.txt
+BA3195 - BA3198/FML-CHECKLIST-TEMPLATE.md
+BA3195 - BA3198/excel-to-json.py
+BA3195 - BA3198/markdown/timeline_%foldername%_summary.md
+BA3195 - BA3198/email_processor-msg-perplex-original.py
