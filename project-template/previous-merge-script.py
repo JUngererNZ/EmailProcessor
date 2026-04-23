@@ -1,121 +1,68 @@
+# update 17.04.2026 09:13
 #!/usr/bin/env python3
-"""
-Script to merge data from markdown files in the 'markdown' folder into the FML-CHECKLIST-TEMPLATE.md
-Generates an output file named {parent_folder}_{YYYYMMDD}.md with merged data.
-"""
-
 import os
 import datetime
-import re
+from gpt4all import GPT4All
 
-def parse_markdown_table(lines):
-    """Parse a markdown table from lines, return list of rows, each row is list of cells."""
-    rows = []
-    for line in lines:
-        if line.strip().startswith('|'):
-            cells = [cell.strip() for cell in line.split('|') if cell.strip()]
-            if cells:
-                rows.append(cells)
-    return rows
-
-def extract_data_from_md(content):
-    """Extract header and checklist data from markdown content."""
-    lines = content.split('\n')
-    tables = []
-    current_table = []
-    in_table = False
-    for line in lines:
-        if line.strip().startswith('|'):
-            current_table.append(line)
-            in_table = True
-        elif in_table:
-            if current_table:
-                tables.append(current_table)
-                current_table = []
-            in_table = False
-    if current_table:
-        tables.append(current_table)
-
-    header_data = {}
-    checklist_data = {}
-
-    if len(tables) >= 2:
-        header_table = parse_markdown_table(tables[0])
-        checklist_table = parse_markdown_table(tables[1])
-
-        # Header table: assume first column is key, second is value
-        for row in header_table[1:]:  # skip header row
-            if len(row) >= 2:
-                key = row[0].replace('**', '').replace(':', '').strip()
-                value = row[1].strip()
-                if value:
-                    header_data[key] = value
-
-        # Checklist table: Task, Drafted, Completed, Comments
-        for row in checklist_table[2:]:  # skip header and separator
-            if len(row) >= 4:
-                task = row[0].strip()
-                drafted = row[1].strip()
-                completed = row[2].strip()
-                comments = row[3].strip()
-                checklist_data[task] = {
-                    'drafted': drafted,
-                    'completed': completed,
-                    'comments': comments
-                }
-
-    return header_data, checklist_data
+def generate_summary(model, content):
+    """Generates a brief summary of the markdown content using the local LLM."""
+    prompt = f"Summarize the following markdown content concisely in two sentences:\n\n{content[:2000]}"
+    # limit content to first 2000 chars to stay within context limits
+    with model.chat_session():
+        response = model.generate(prompt, max_tokens=500)
+    return response.strip()
 
 def main():
     cwd = os.getcwd()
-    template_path = os.path.join(cwd, 'FML-CHECKLIST-TEMPLATE.md')
-    if not os.path.exists(template_path):
-        print(f"Template file not found: {template_path}")
-        return
-
     markdown_dir = os.path.join(cwd, 'markdown')
+    
     if not os.path.exists(markdown_dir):
         print(f"Markdown directory not found: {markdown_dir}")
         return
 
+    # Initialize the local model
+    # Note: GPT4All typically looks in C:\Users\User\.cache\gpt4all\ by default
+    model_path = "Llama-3.2-1B-Instruct-Q4_0.gguf"
+    print(f"Loading model: {model_path}...")
+    model = GPT4All(model_name=model_path, allow_download=False)
+
     md_files = [f for f in os.listdir(markdown_dir) if f.endswith('.md')]
     if not md_files:
-        print("No markdown files found in markdown directory")
+        print("No markdown files found.")
         return
 
-    # Sort by modification time, latest first
+    # 1. Process files and generate summaries
+    all_summaries = []
+    latest_content = ""
+    
+    # Sort files to identify the 'latest' for the primary content
     md_files.sort(key=lambda f: os.path.getmtime(os.path.join(markdown_dir, f)), reverse=True)
 
-    merged_content = None
-    for md_file in md_files:
+    for i, md_file in enumerate(md_files):
         path = os.path.join(markdown_dir, md_file)
-        try:
-            with open(path, 'r', encoding='utf-8') as f:
-                content = f.read()
-        except Exception as e:
-            continue
-        if 'TRANSPORT INSTRUCTION' in content:
-            merged_content = content
-            break
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # Keep the latest file's full content for the main body
+        if i == 0:
+            latest_content = content
+            
+        print(f"Summarizing {md_file}...")
+        summary = generate_summary(model, content)
+        all_summaries.append(f"### Summary of {md_file}\n{summary}\n")
 
-    if merged_content is None and md_files:
-        # Fallback to latest
-        latest_md = os.path.join(markdown_dir, md_files[0])
-        with open(latest_md, 'r', encoding='utf-8') as f:
-            merged_content = f.read()
-
-    if merged_content is None:
-        print("No suitable markdown content found")
-        return
-
-    # Generate output
+    # 2. Generate the output
     folder_name = os.path.basename(cwd)
     date_str = datetime.datetime.now().strftime('%Y%m%d')
     output_name = f'{folder_name}_{date_str}.md'
     output_path = os.path.join(cwd, output_name)
 
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(merged_content)
+        # Write the full content of the latest file
+        f.write(latest_content)
+        f.write("\n\n---\n## File Summaries\n\n")
+        # Append all generated summaries
+        f.write("\n".join(all_summaries))
 
     print(f"Output written to {output_path}")
 
